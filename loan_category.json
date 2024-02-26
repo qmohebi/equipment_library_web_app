@@ -1,0 +1,19 @@
+{
+    "major_category": [
+        "Air Compressor - Bed/Mattress",
+    "Defibrillator",
+    "DVT Compression Unit",
+    "ECG Machine",
+    "Enteral Feeding Pump",
+    "Flow Generator",
+    "Nebuliser",
+    "Negative Pressure Wound Therapy",
+    "Patient Warming System",
+    "Suction Unit - Portable",
+    "Infusion pumps",
+    "Ultrasound Bladder Scanner"
+        ],
+"minor_category_infusion": ["Volumetric Pump", "Syringe Pump", "Syringe Pump - Ambulatory"],
+"minor_category_patient_monitoring": ["cardiac monitoring", "Pulse Oximeter"],
+"minor_category_ventilator": ["Ventilator - Non Invasive", "BiPAP"]
+}

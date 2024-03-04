@@ -1,0 +1,27 @@
+
+:root {
+  --orange: #fe6903;
+  --bodyColor: #eceeed;
+  --blue: #124faa;
+  --white: #ffff;
+  --dark1: #2d2d2d;
+  --dark2: #505050;
+  --dark3: #9c9c9c;
+  --dark4: #c2c2c2;
+  --dark-light: #d4d4d4;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Figtree", sans-serif;
+  background-color: var(--bodyColor);
+  min-height: 100svh;
+}
+
+.hero {
+  min-height: 30vh;
+  /* border: 1px solid #000; */
+}

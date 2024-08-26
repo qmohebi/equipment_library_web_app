@@ -1,0 +1,134 @@
+:root {
+  --orange: #fe6903;
+  --bodyColor: #fafafa;
+  --blue: #124faa;
+  --white: #ffff;
+  --dark1: #2d2d2d;
+  --dark2: #505050;
+  --dark3: #9c9c9c;
+  --dark4: #c2c2c2;
+  --dark-light: #d4d4d4;
+}
+
+body {
+  font-family: "Figtree", sans-serif;
+  background-color: var(--bodyColor);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-link {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.hero-section {
+  min-height: 14rem;
+}
+
+.equipment-btn {
+  border: none;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  cursor: pointer;
+  text-align: center;
+  color: #ffffff;
+  background: #008060;
+  border-radius: 10px;
+  font-size: 16px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 0px 0px, rgba(0, 0, 0, 0.2) 0px -1px 0px 0px inset;
+}
+
+.equipment-btn:hover {
+  background: #006e52;
+}
+
+.user-input-section {
+  /* border: 1px solid #000; */
+}
+
+.decrement-btn,
+.increment-btn {
+  background-color: var(--dark4);
+  border: none;
+  min-width: 2rem;
+  aspect-ratio: 1;
+  border-radius: 3px;
+}
+
+.counter-value {
+  border: none;
+  width: 5.6rem;
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+/* remove input arrows */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.additional-info-label {
+  width: 80px;
+}
+
+.additonal-info textarea {
+  height: 120px;
+  resize: none;
+}
+
+.confirm-btn {
+}
+
+.action-btns {
+  border: none;
+  padding: 5px 20px;
+  /* min-width: 2rem; */
+  /* aspect-ratio: 1; */
+  border-radius: 3px;
+}
+.confirm-btn {
+  background-color: var(--white);
+}
+.cancel-btn {
+  background-color: var(--dark4);
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin: 20px;
+}
+.category {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+.category img {
+  max-width: 100px;
+  max-height: 100px;
+  margin-bottom: 10px;
+  border-radius: 50%;
+}
+.category-name {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+@media (max-width: 800px) {
+  .categories {
+      grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 500px) {
+  .categories {
+      grid-template-columns: 1fr;
+  }
+}

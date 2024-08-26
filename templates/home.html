@@ -1,0 +1,36 @@
+{%extends "base.html"%}
+
+{% block content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category List</title>
+
+</head>
+<h3>Select items to loan</h3>
+  <form method="post" action="">
+      {% csrf_token %}
+      <div class="categories">
+        {% for model in form.fields.selected_model.queryset %}
+            <label class="category">
+                <input type="checkbox" name="selected_model" value="{{ model.pk }}">
+                <img src="{{ model.image.url }}" alt="{{ model.display_name }}">
+                <div class="category-name">{{ model.display_name }}</div>
+            </label>
+        {% endfor %}
+    </div>
+  
+      <!-- Location dropdown -->
+      <div class="location">
+          <label for="id_location">Select Location:</label>
+          {{ form.location }}
+      </div>
+  
+      <button type="submit">Submit</button>
+  </form>
+</body>
+</html>
+
+    {% endblock content %}

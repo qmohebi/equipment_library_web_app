@@ -24,6 +24,11 @@ env.read_env()
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env("DJANDGO_SECRET_KEY")
+DB_NAME = env('DB_NAME')
+DB_USERNAME = env('DB_USERNAME')
+DB_PASSWORD = env('BD_PASSWORD')
+DB_HOST = env('DB_HOST')
+DB_PORT =env('PORT')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -81,7 +86,16 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
-    }
+    },
+    "equip": {
+        "ENGINE": "mssql",
+        "NAME": DB_NAME,
+        "USER": DB_USERNAME,
+        "PASSWORD": DB_PASSWORD,
+        "HOST": DB_HOST,
+        "PORT": DB_PORT,
+        "OPTIONS": {"driver": "SQL Server Native Client 11.0"},
+    },
 }
 
 
@@ -128,5 +142,3 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-print(STATICFILES_DIRS)

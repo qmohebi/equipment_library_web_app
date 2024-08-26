@@ -17,7 +17,7 @@ class EquipmentModel(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return self.equip_model_id
+        return self.display_name
 
 
 from django.db import models

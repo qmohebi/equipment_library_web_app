@@ -9,26 +9,6 @@
     <title>Category List</title>
 
 </head>
-<!-- <body>
-  <h1>Categories</h1>
-  <form method="post" action="">
-      {% csrf_token %}
-      <div class="categories">
-          {% for category in categories %}
-              <label class="category">
-                  <input type="checkbox" name="selected_categories" value="{{ category.equip_category_id }}">
-                  <img src="{{ category.image.url }}" alt="{{ category.name }}">
-                  <div class="category-name">{{ category.name }}</div>
-              </label>
-          {% endfor %}
-      </div> -->
-      <!-- <div class="location">
-        <label for="id_location">Select Location:</label>
-        {{ form.location }}
-      </div> -->
-      <!-- <button type="submit">Submit</button>
-  </form> -->
-
 <h3>Select items to loan</h3>
   <form method="post" action="">
       {% csrf_token %}

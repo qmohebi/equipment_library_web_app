@@ -1,6 +1,6 @@
 :root {
   --orange: #fe6903;
-  --bodyColor: #eceeed;
+  --bodyColor: #fafafa;
   --blue: #124faa;
   --white: #ffff;
   --dark1: #2d2d2d;
@@ -94,4 +94,41 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 .cancel-btn {
   background-color: var(--dark4);
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin: 20px;
+}
+.category {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+.category img {
+  max-width: 100px;
+  max-height: 100px;
+  margin-bottom: 10px;
+  border-radius: 50%;
+}
+.category-name {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+@media (max-width: 800px) {
+  .categories {
+      grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 500px) {
+  .categories {
+      grid-template-columns: 1fr;
+  }
 }

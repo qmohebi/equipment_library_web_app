@@ -27,15 +27,15 @@ class ModelSelectionForm(forms.Form):
         required=True,
         # to_field_name="equip_model_id",
     )
-    location = forms.ModelChoiceField(
-        queryset=Location.objects.using("equip")
-        .filter(
-            siteid="STG200404040007",
-            inactive=0,
-        )
-        .exclude(locationtypeid__in=exclude_location)
-        .exclude(locationtypeid__isnull=True)
-        .order_by("locationshortname"),
-        empty_label="Select a location",
-        required=True,
-    )
+    # location = forms.ModelChoiceField(
+    #     queryset=Location.objects.using("equip")
+    #     .filter(
+    #         siteid="STG200404040007",
+    #         inactive=0,
+    #     )
+    #     .exclude(locationtypeid__in=exclude_location)
+    #     .exclude(locationtypeid__isnull=True)
+    #     .order_by("locationshortname"),
+    #     empty_label="Select a location",
+    #     required=True,
+    # )

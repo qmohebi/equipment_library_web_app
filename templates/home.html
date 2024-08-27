@@ -1,15 +1,19 @@
-{%extends "base.html"%} 
-
-{% block content%}
-<h3 class="text-center">Select items to loan</h3>
+{%extends "base.html"%} {% block content%}
+<h3 class="text-center pb-3">Select items to loan</h3>
 <form method="post" action="">
   {% csrf_token %}
   <div class="categories">
     {% for model in form.fields.selected_model.queryset %}
-    <label class="category d-flex">
-      <input type="checkbox" hidden name="selected_model" value="{{ model.pk }}" />
-      <img src="{{ model.image.url }}" class="img-fluid" alt="{{ model.display_name }}" />
-      <div class="category-name">{{ model.display_name }}</div>
+    <label class="category d-flex flex-column gap-3 bg-white">
+      <input type="checkbox" name="selected_model" value="{{ model.pk }}" />
+      <img
+        src="{{ model.image.url }}"
+        class="device-img object-fit-contain p-3"
+        alt="{{ model.display_name }}"
+      />
+      <div class="device-title pb-3 text-center fw-bold">
+        <h5 class="mb-0">{{ model.display_name }}</h5>
+      </div>
     </label>
     {% endfor %}
   </div>

@@ -17,14 +17,27 @@ class HomePageView(FormView):
 
     def form_valid(self, form):
 
+        print(self.request.POST)
+
         selected_models = form.cleaned_data.get("selected_model")
         selected_location = form.cleaned_data.get("location")
+        name = form.cleaned_data.get("requester_name")
+        ext = form.cleaned_data.get("extension")
+        notes = form.cleaned_data.get("notes")
+
+        # print(ext)
+        print(name)
+        print(ext)
+        print(notes)
 
         # get the location id for given location name selected
-        location_id = Location.objects.using("equip").filter(
-            locationshortname=selected_location
-        ).values_list('locationid', flat=True).first()
-        print(f"location_id: {location_id}")
+        # location_id = Location.objects.using("equip").filter(
+        #     locationshortname=selected_location
+        # ).values_list('locationid', flat=True).first()
+        # print(f"location_id: {location_id}")
+
+        print(selected_location)
+
 
         for model_id in selected_models:
             print(model_id)

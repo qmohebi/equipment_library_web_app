@@ -4,8 +4,15 @@ import os
 import sys
 
 
+
 def main():
     """Run administrative tasks."""
+
+    # if base.DEBUG:
+    #     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'library_web_app.settings.local')
+    # else:
+    #     os.environ.setdefault('DJANGO_SETTINGS_MODULE', '.library_web_app.settings.production')
+        
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'libary_web_app.settings')
     try:
         from django.core.management import execute_from_command_line

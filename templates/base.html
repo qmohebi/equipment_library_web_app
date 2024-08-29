@@ -17,6 +17,9 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <title>Equipment Library Loan</title>
   </head>
   <body>
@@ -41,7 +44,16 @@
         <h1 class="heading mb-0">Equipment Library Loan</h1>
       </div>
     </section>
-    <main class="container">{%block content %} {%endblock content %}</main>
+    <main class="container">
+      {%block content %} 
+
+      {%endblock content %}
+
+      {% block scripts %}
+
+      {% endblock %}
+    
+    </main>
     <footer class="footer mt-auto py-3 bg-light">
       <div class="container text-center">
         <span class="text-muted">© 2024 Inc. All rights reserved.</span>

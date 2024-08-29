@@ -1,5 +1,5 @@
 from django import forms
-from .models import Category, Location, EquipmentModel
+from .models import Category, Location, EquipmentModel, LoanLocation
 
 
 # class CategorySelectionForm(forms.Form):
@@ -26,6 +26,27 @@ class ModelSelectionForm(forms.Form):
         widget=forms.CheckboxSelectMultiple,
         required=True,
         # to_field_name="equip_model_id",
+    )
+    location = forms.ModelChoiceField(
+        queryset=LoanLocation.objects.all(),
+        empty_label="Select a Location",
+        required=True,
+    )
+
+    requester_name = forms.CharField(
+        label="Name", empty_value="Your name", max_length=200, required=True
+    )
+    extension = forms.CharField(
+        label="extension",
+        empty_value="Enter your extension",
+        max_length=12,
+        required=True,
+    )
+    notes = forms.CharField(
+        label="notes",
+        max_length=200,
+        empty_value="additional notes like patient MRN",
+        required=False,
     )
     # location = forms.ModelChoiceField(
     #     queryset=Location.objects.using("equip")

@@ -22,6 +22,25 @@
     <label for="id_location">Select Location:</label>
     {{ form.location }}
   </div>
+  <div class = "name">
+    <label for="id_requester_name">Type your name:</label>
+    {{ form.requester_name }}
+  </div>
+  <div>
+    <label for="id_extension:">Your Extension:</label>
+    {{ form.extension}}
+  </div>
+  <div>
+    <label for="id_notes">Notes:</label>
+    {{ form.notes}}
+  </div>
   <button type="submit">Submit</button>
 </form>
 {% endblock content %}
+
+{% block scripts %}
+<script>
+  $("#id_location").select2();
+</script>
+
+{% endblock %}

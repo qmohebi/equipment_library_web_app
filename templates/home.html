@@ -1,9 +1,12 @@
-{%extends "base.html"%} {% block content%}
-<h3 class="text-center pb-3">Select items to loan</h3>
-<form method="post" action="">
+{% extends "base.html" %} {% block content %} {% load crispy_forms_tags %}
+<h3 class="text-center mb-4">Select items to loan</h3>
+
+<form method="post" action="" class="needs-validation" novalidate>
   {% csrf_token %}
-  <div class="categories">
-    {% for model in form.fields.selected_model.queryset %}
+
+  <!-- Display the ModelSelectionForm -->
+  <div class="categories mt-3 mb-4">
+    {% for model in model_form.fields.selected_model.queryset %}
     <label class="category d-flex flex-column gap-3 bg-white">
       <input type="checkbox" name="selected_model" value="{{ model.pk }}" />
       <img
@@ -16,31 +19,35 @@
       </div>
     </label>
     {% endfor %}
+        {% if model_form.selected_model.errors %}
+      <div class="alert alert-danger">
+        {{ model_form.selected_model.errors.0 }}
+      </div>
+    {% endif %}
   </div>
-  <!-- Location dropdown -->
-  <div class="location">
-    <label for="id_location">Select Location:</label>
-    {{ form.location }}
-  </div>
-  <div class = "name">
-    <label for="id_requester_name">Type your name:</label>
-    {{ form.requester_name }}
-  </div>
-  <div>
-    <label for="id_extension:">Your Extension:</label>
-    {{ form.extension}}
-  </div>
-  <div>
-    <label for="id_notes">Notes:</label>
-    {{ form.notes}}
-  </div>
-  <button type="submit">Submit</button>
+  <div class="loan-form">{% crispy loan_form %}</div>
 </form>
-{% endblock content %}
-
-{% block scripts %}
+{% endblock %} {% block scripts %}
 <script>
   $("#id_location").select2();
+
+  const forms = document.querySelectorAll(".needs-validation");
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach((form) => {
+    form.addEventListener(
+      "submit",
+      (event) => {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+
+        form.classList.add("was-validated");
+      },
+      false
+    );
+  });
 </script>
 
 {% endblock %}

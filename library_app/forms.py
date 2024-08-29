@@ -1,16 +1,24 @@
+from typing import Any, Mapping
 from django import forms
+from django.forms.renderers import BaseRenderer
+from django.forms.utils import ErrorList
 from .models import Category, Location, EquipmentModel, LoanLocation
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
 
 
-# class CategorySelectionForm(forms.Form):
-#     selected_categories = forms.ModelMultipleChoiceField(
-#         queryset=Category.objects.all(),
-#         widget=forms.CheckboxSelectMultiple,
-#         required=False,
-#     )
+class LoanRequestInfo(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = "id-ModelSelectionForm"
+        self.helper.form_class = "form-group"
+        self.helper.form_method = "post"
+        self.helper.form_action = "success/"
+        # self.helper.form_tag = False
 
+        self.helper.add_input(Submit("submit", "Submit"))
 
-class ModelSelectionForm(forms.Form):
     exclude_location = [
         "45B7DCD1518B4F289BF692BD28EE8F45",
         "45EE813FF5D442AFB799B48F49C50C75",
@@ -21,33 +29,48 @@ class ModelSelectionForm(forms.Form):
         "951CB87BFBF347039BCD60D4C31785BA",
         "",
     ]
+    location = forms.ModelChoiceField(
+        label="Select location from dropdown",
+        empty_label="Select a location from the dropdown",
+        queryset=LoanLocation.objects.all(), 
+        )
+
+    requester_name = forms.CharField(
+        label="Enter your name", 
+        max_length=200, 
+        required=True
+    )
+    extension = forms.IntegerField(
+        label="Your Extension",
+        required=True,
+    )
+    notes = forms.CharField(
+        label="Additional notes",
+        max_length=200,
+        required=False,
+    )
+
+  
+    widgets = {
+        "location": forms.Select(attrs={"class": "col-md-6 mb-3"}),
+        "requester_name": forms.Select(attrs={"class": "col-md-6 mb-3"}),
+        "extension": forms.Select(attrs={"div class": "row col"})
+    }
+class ModelSelectionForm(forms.Form):
+    
+    
     selected_model = forms.ModelMultipleChoiceField(
         queryset=EquipmentModel.objects.all(),
         widget=forms.CheckboxSelectMultiple,
         required=True,
         # to_field_name="equip_model_id",
     )
-    location = forms.ModelChoiceField(
-        queryset=LoanLocation.objects.all(),
-        empty_label="Select a Location",
-        required=True,
-    )
-
-    requester_name = forms.CharField(
-        label="Name", empty_value="Your name", max_length=200, required=True
-    )
-    extension = forms.CharField(
-        label="extension",
-        empty_value="Enter your extension",
-        max_length=12,
-        required=True,
-    )
-    notes = forms.CharField(
-        label="notes",
-        max_length=200,
-        empty_value="additional notes like patient MRN",
-        required=False,
-    )
+    # widgets = {
+    #     'location':forms.Select(attrs={'class':'form-control'}),
+    #     'requester_name':forms.TextInput(attrs={'class':'form-control'}),
+    #     'extension':forms.TextInput(attrs={'class':'form-control'}),
+    #     'notes':forms.Textarea(attrs={'class':'form-control'})
+    # }
     # location = forms.ModelChoiceField(
     #     queryset=Location.objects.using("equip")
     #     .filter(

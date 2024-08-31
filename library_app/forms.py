@@ -15,7 +15,7 @@ class LoanRequestInfo(forms.Form):
         self.helper.form_class = "form-group"
         self.helper.form_method = "post"
         self.helper.form_action = "success/"
-        # self.helper.form_tag = False
+        # self.helper.form_tag = True
 
         self.helper.add_input(Submit("submit", "Submit"))
 
@@ -44,6 +44,7 @@ class LoanRequestInfo(forms.Form):
         label="Your Extension",
         required=True,
     )
+    # notes = forms.Textarea()
     notes = forms.CharField(
         label="Additional notes",
         max_length=200,
@@ -63,6 +64,7 @@ class ModelSelectionForm(forms.Form):
         queryset=EquipmentModel.objects.all(),
         widget=forms.CheckboxSelectMultiple,
         required=True,
+        error_messages={'required': 'Please select a model from below!'}
         # to_field_name="equip_model_id",
     )
     # widgets = {

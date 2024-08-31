@@ -2,9 +2,11 @@
 <h3 class="text-center mb-4">Select items to loan</h3>
 
 <form method="post" action="" class="needs-validation" novalidate>
-  {% csrf_token %}
-
-  <!-- Display the ModelSelectionForm -->
+  {% if model_form.selected_model.errors %}
+  <div class="alert alert-danger d-flex align-items-center" role="alert">
+    {{ model_form.selected_model.errors.0 }}
+  </div>
+  {% endif %} {% csrf_token %}
   <div class="categories mt-3 mb-4">
     {% for model in model_form.fields.selected_model.queryset %}
     <label class="category d-flex flex-column gap-3 bg-white">
@@ -19,13 +21,10 @@
       </div>
     </label>
     {% endfor %}
-        {% if model_form.selected_model.errors %}
-      <div class="alert alert-danger">
-        {{ model_form.selected_model.errors.0 }}
-      </div>
-    {% endif %}
   </div>
-  <div class="loan-form">{% crispy loan_form %}</div>
+  <div 
+  class="loan-form">{% crispy loan_form %}
+  </div>
 </form>
 {% endblock %} {% block scripts %}
 <script>

@@ -17,35 +17,37 @@ class HomePageView(FormView):
     success_url = reverse_lazy("library_app:successful_loan")
 
     def get(self, request, *args, **kwargs):
-      loan_form = LoanRequestInfo()
-      model_form = ModelSelectionForm()
-      return render(request, self.template_name, {"loan_form":loan_form, "model_form":model_form})
+        loan_form = LoanRequestInfo()
+        model_form = ModelSelectionForm()
+        return render(
+            request,
+            self.template_name,
+            {"loan_form": loan_form, "model_form": model_form},
+        )
 
     def post(self, request, *args, **kwargs):
         loan_form = LoanRequestInfo(request.POST)
         model_form = ModelSelectionForm(request.POST)
 
         if loan_form.is_valid() and model_form.is_valid():
+            selected_models = model_form.cleaned_data.get("selected_model")
+            selected_location = loan_form.cleaned_data.get("location")
+            name = loan_form.cleaned_data.get("requester_name")
+            ext = loan_form.cleaned_data.get("extension")
+            notes = loan_form.cleaned_data.get("notes")
 
-          selected_models = model_form.cleaned_data.get("selected_model")
-          selected_location = loan_form.cleaned_data.get("location")
-          name = loan_form.cleaned_data.get("requester_name")
-          ext = loan_form.cleaned_data.get("extension")
-          notes = loan_form.cleaned_data.get("notes")
+            print(name, ext, notes, selected_location)
 
-          print(name, ext, notes, selected_location)
+            for model_id in selected_models:
+                print(model_id)
 
-
-          for model_id in selected_models:
-              print(model_id)
-
-          return self.form_valid(loan_form)
+            return self.form_valid(loan_form)
         else:
-            return render(request, self.template_name, {
-            "loan_form": loan_form,
-            "model_form": model_form
-        })
-
+            return render(
+                request,
+                self.template_name,
+                {"loan_form": loan_form, "model_form": model_form},
+            )
 
     def form_invalid(self, form):
         print("Form is invalid")
@@ -55,3 +57,7 @@ class HomePageView(FormView):
 
 class SuccessPageView(TemplateView):
     template_name = "successful_loan.html"
+
+
+class OutOfHourPageView(TemplateView):
+    template_name = 'out_of_hour.html'

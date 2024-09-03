@@ -1,7 +1,6 @@
 from .forms import ModelSelectionForm, LoanRequestInfo
 from django.views.generic import FormView, TemplateView
 from django.urls import reverse_lazy
-from .models import Location
 from django.shortcuts import render
 
 # from django.shortcuts import render

@@ -32,12 +32,18 @@ class LoanRequestInfo(forms.Form):
     extension = forms.IntegerField(
         label="Your Extension",
         required=True,
+        widget=forms.NumberInput,
     )
     # notes = forms.Textarea()
     notes = forms.CharField(
         label="Additional notes",
         max_length=200,
-        widget=forms.Textarea(attrs={"placeholder": "Enter additional information like patient MRN"}),
+        widget=forms.Textarea(
+            attrs={
+                "placeholder": "Enter additional information like patient MRN",
+                "inputmode": "numeric",
+            }
+        ),
         required=False,
     )
 

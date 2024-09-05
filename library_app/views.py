@@ -1,7 +1,9 @@
 from .forms import ModelSelectionForm, LoanRequestInfo
 from django.views.generic import FormView, TemplateView
 from django.urls import reverse_lazy
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+
+from datetime import datetime, time
 
 # from django.shortcuts import render
 
@@ -15,7 +17,24 @@ class HomePageView(FormView):
     form_class = LoanRequestInfo
     success_url = reverse_lazy("library_app:successful_loan")
 
+    opening_time = time(8,45)
+    closing_time = time(17, 45)
+
+    def out_of_hour(self):
+        """
+        check if the current date is outside working hours
+        and the day is weekend"""
+        now = datetime.now()
+        current_time = now.time()
+        current_day = now.isoweekday()
+        return current_day in [6, 7] or current_time < self.opening_time or current_time > self.closing_time
+
+
     def get(self, request, *args, **kwargs):
+
+        if self.out_of_hour():
+            return redirect("library_app:out_of_hour")
+        
         loan_form = LoanRequestInfo()
         model_form = ModelSelectionForm()
         return render(

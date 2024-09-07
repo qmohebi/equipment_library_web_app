@@ -19,8 +19,8 @@ class LoanRequestInfo(forms.Form):
         "",
     ]
     location = forms.ModelChoiceField(
-        label="Select location from dropdown",
-        empty_label="Select a location from the dropdown",
+        label="Location",
+        # empty_label="Select a location from the dropdown",
         queryset=LoanLocation.objects.all(),
     )
 
@@ -28,12 +28,13 @@ class LoanRequestInfo(forms.Form):
         label="Enter your name",
         max_length=200,
         required=True,
+        widget=forms.TextInput(attrs={'placeholder': 'e.g. John'}),
     )
     extension = forms.IntegerField(
-        label="Your Extension",
-        required=True,
-        widget=forms.NumberInput,
-    )
+    label="Extension",
+    required=True,
+    widget=forms.NumberInput(attrs={'placeholder': 'Enter your extension'}),
+)
     # notes = forms.Textarea()
     notes = forms.CharField(
         label="Additional notes",

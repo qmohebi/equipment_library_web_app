@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block content %} {% load crispy_forms_tags %}
 <h3 class="text-center mb-4">Select items to loan</h3>
 
-<form method="post" action="" class="needs-validation" novalidate>
+<form method="post" action="" class="needs-validation main-form" novalidate>
   {% if model_form.selected_model.errors %}
   <div class="alert alert-danger d-flex align-items-center" role="alert">
     {{ model_form.selected_model.errors.0 }}
@@ -9,44 +9,48 @@
   {% endif %} {% csrf_token %}
   <div class="categories mt-3 mb-4">
     {% for model in model_form.fields.selected_model.queryset %}
-    <label class="category d-flex flex-column gap-3 bg-white">
+    <label class="category d-flex flex-column gap-3 bg-white border-0">
       <input type="checkbox" name="selected_model" value="{{ model.pk }}" />
       <img
         src="{{ model.image.url }}"
         class="device-img object-fit-contain p-3"
         alt="{{ model.display_name }}"
       />
-      <div class="device-title pb-3 text-center fw-bold">
+      <div class="device-title pt-2 pb-3 text-center fw-bold">
         <h5 class="mb-0">{{ model.display_name }}</h5>
       </div>
     </label>
     {% endfor %}
   </div>
 
-  <div 
-  class="loan-form">{% crispy loan_form %}
-  </div>
+  <div class="loan-form">{% crispy loan_form %}</div>
 </form>
 {% endblock %} {% block scripts %}
+
 <script>
-  $("#id_location").select2();
+  $(document).ready(function () {
+    // location dropdown list (Jquery)
+    $("#id_location").select2({
+      theme: "bootstrap5",
+    });
 
-  const forms = document.querySelectorAll(".needs-validation");
+    const forms = document.querySelectorAll(".needs-validation");
 
-  // Loop over them and prevent submission
-  Array.from(forms).forEach((form) => {
-    form.addEventListener(
-      "submit",
-      (event) => {
-        if (!form.checkValidity()) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
+    // Loop over them and prevent submission
+    Array.from(forms).forEach((form) => {
+      form.addEventListener(
+        "submit",
+        (event) => {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
 
-        form.classList.add("was-validated");
-      },
-      false
-    );
+          form.classList.add("was-validated");
+        },
+        false
+      );
+    });
   });
 </script>
 

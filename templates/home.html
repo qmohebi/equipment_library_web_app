@@ -1,4 +1,8 @@
-{% extends "base.html" %} {% block content %} {% load crispy_forms_tags %}
+{% extends "base.html" %} {% block content %} 
+{% load crispy_forms_tags %}
+<!-- {%block title %} 
+Equipment Library Loan
+{% endblock %} -->
 <h3 class="text-center mb-4">Select items to loan</h3>
 
 <form method="post" action="" class="needs-validation main-form" novalidate>
@@ -9,7 +13,7 @@
   {% endif %} {% csrf_token %}
   <div class="categories mt-3 mb-4">
     {% for model in model_form.fields.selected_model.queryset %}
-    <label class="category d-flex flex-column gap-3 bg-white border-0">
+    <label class="category d-flex justify-content-between flex-column gap-2 bg-white border-0">
       <input type="checkbox" name="selected_model" value="{{ model.pk }}" />
       <img
         src="{{ model.image.url }}"
@@ -22,7 +26,6 @@
     </label>
     {% endfor %}
   </div>
-
   <div class="loan-form">{% crispy loan_form %}</div>
 </form>
 {% endblock %} {% block scripts %}
@@ -31,7 +34,7 @@
   $(document).ready(function () {
     // location dropdown list (Jquery)
     $("#id_location").select2({
-      theme: "bootstrap5",
+      theme: "bootstrap-5",
     });
 
     const forms = document.querySelectorAll(".needs-validation");

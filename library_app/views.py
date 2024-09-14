@@ -18,7 +18,7 @@ class HomePageView(FormView):
     success_url = reverse_lazy("library_app:successful_loan")
 
     opening_time = time(8,45)
-    closing_time = time(17, 45)
+    closing_time = time(23, 45)
 
     def out_of_hour(self):
         """
@@ -32,8 +32,8 @@ class HomePageView(FormView):
 
     def get(self, request, *args, **kwargs):
 
-        if self.out_of_hour():
-            return redirect("library_app:out_of_hour")
+        # if self.out_of_hour():
+        #     return redirect("library_app:out_of_hour")
         
         loan_form = LoanRequestInfo()
         model_form = ModelSelectionForm()
@@ -58,6 +58,10 @@ class HomePageView(FormView):
 
             for model_id in selected_models:
                 print(model_id)
+                # take model id and location id
+                # write to the database
+                # get a loan request number for each model
+                # send to front end
 
             return self.form_valid(loan_form)
         else:

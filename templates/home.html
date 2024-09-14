@@ -26,7 +26,13 @@ Equipment Library Loan
     </label>
     {% endfor %}
   </div>
-  <div class="loan-form">{% crispy loan_form %}</div>
+  <div> {{ loan_form.location|as_crispy_field }} </div>
+  <div> {{ loan_form.requester_name|as_crispy_field }} </div>
+  <div> {{ loan_form.extension|as_crispy_field }} </div>
+  <div> {{ loan_form.notes|as_crispy_field }} </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  
+  {% comment %} <div class="loan-form">{% crispy loan_form %}</div> {% endcomment %}
 </form>
 {% endblock %} {% block scripts %}
 

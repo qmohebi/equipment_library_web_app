@@ -44,8 +44,8 @@ class HomePageView(FormView):
         )
 
     def post(self, request, *args, **kwargs):
-        loan_form = LoanRequestInfo(request.POST)
         model_form = ModelSelectionForm(request.POST)
+        loan_form = LoanRequestInfo(request.POST)
 
         if loan_form.is_valid() and model_form.is_valid():
             selected_models = model_form.cleaned_data.get("selected_model")

@@ -4,6 +4,7 @@
   --nhs-main-blue: #0072ce;
   --nhs-second-blue: #0164ce;
   --nhs-light-blue: #98bee5;
+  --nhs-green-tick: #009639;
   --boot-placeholder: #626466;
   --white: #ffff;
   --dark1: #2d2d2d;
@@ -15,6 +16,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-y: scroll;
 }
 
 * {
@@ -25,10 +27,15 @@ html {
 
 body {
   min-height: 100svh;
-  /* display: flex;
-  flex-direction: column; */
   font-family: "Figtree", sans-serif;
   background-color: var(--bodyColor);
+}
+
+ul
+{
+list-style: none;
+padding: 0;
+margin: 0;
 }
 
 .nav-link {
@@ -137,6 +144,37 @@ input[type="number"]::-webkit-outer-spin-button {
 .submit-btn:hover {
   background-color: var(--nhs-second-blue);
 }
+
+body.modal-open {
+  padding-right: 12px !important;
+}
+
+.custom-modal-body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bx-check-circle {
+  font-size: 6rem;
+  font-weight: 100;
+  color: var(--nhs-green-tick);
+}
+
+.modal-success-msg {
+  color: #0B1215;
+}
+
+.loan-success-items > li {
+  padding: 0 0 0.2rem;
+}
+
+.custom-modal-footer{
+  padding: 1rem;
+  text-align: center;
+}
+
 
 /* ------- Media Queries for responsive ------- */
 

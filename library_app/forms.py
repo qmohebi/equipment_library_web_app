@@ -67,7 +67,12 @@ class LoanRequestInfo(forms.Form):
 
         # self.helper.form_tag = True
 
-        self.helper.add_input(Submit("submit", "Submit", css_class="btn submit-btn rounded"))
+        self.helper.add_input(Submit(
+    "submit", 
+    "Submit", 
+    css_class="btn submit-btn rounded px-5", 
+    **{'data-bs-toggle': 'modal', 'data-bs-target': '#staticBackdrop'}
+))
 
 
 

@@ -31,11 +31,10 @@ body {
   background-color: var(--bodyColor);
 }
 
-ul
-{
-list-style: none;
-padding: 0;
-margin: 0;
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .nav-link {
@@ -48,7 +47,6 @@ margin: 0;
   min-height: 8rem;
   padding-bottom: 6rem;
 }
-
 
 /* -------------------------- 
 Added padding to the x-axis to make the category items smaller 
@@ -141,6 +139,23 @@ input[type="number"]::-webkit-outer-spin-button {
   /* box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 0px 0px, rgba(0, 0, 0, 0.2) 0px -1px 0px 0px inset; */
 }
 
+.submit-spinner {
+  width: 6px;
+  height: 6px;
+  border-radius: 6px;
+  box-shadow: 15px 0px 0 0 rgba(0, 110, 227, 0.2),
+    12px 9px 0 0 rgba(0, 110, 227, 0.4), 5px 14px 0 0 rgba(0, 110, 227, 0.6),
+    -5px 14px 0 0 rgba(0, 110, 227, 0.8), -12px 9px 0 0 #006ee3;
+
+  animation: submit-spinner 1s infinite linear;
+}
+
+@keyframes submit-spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .submit-btn:hover {
   background-color: var(--nhs-second-blue);
 }
@@ -163,18 +178,17 @@ body.modal-open {
 }
 
 .modal-success-msg {
-  color: #0B1215;
+  color: #0b1215;
 }
 
 .loan-success-items > li {
   padding: 0 0 0.2rem;
 }
 
-.custom-modal-footer{
+.custom-modal-footer {
   padding: 1rem;
   text-align: center;
 }
-
 
 /* ------- Media Queries for responsive ------- */
 

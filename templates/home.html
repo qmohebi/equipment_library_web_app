@@ -30,7 +30,12 @@ Equipment Library Loan
   <div> {{ loan_form.requester_name|as_crispy_field }} </div>
   <div> {{ loan_form.extension|as_crispy_field }} </div>
   <div> {{ loan_form.notes|as_crispy_field }} </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <div class="d-flex gap-4 align-items-center">
+    <button type="submit" id="submit-btn" class="btn btn-primary submit-btn rounded px-5">Submit</button>
+    <div class="spinner-wrapper ms-3" id="spinner">
+      <div class="submit-spinner"></div>
+    </div>
+  </div>
   
   {% comment %} <div class="loan-form">{% crispy loan_form %}</div> {% endcomment %}
 </form>
@@ -45,9 +50,9 @@ Equipment Library Loan
         <i class='bx bx-check-circle bx-tada pt-3'></i>
         <h2 class="modal-success-msg mb-4">Success!</h2>
         <ul class="loan-success-items">
-          <li>Request number: 1234 - DVT pump</li>
-          <li>Request number: 4567 - ECG Machine</li>
-          <li>request number: 2515 - Volumetric Pump</li>
+          <li>Request Number: 1234 - DVT pump</li>
+          <li>Request Number: 4567 - ECG Machine</li>
+          <li>Request Number: 2515 - Volumetric Pump</li>
         </ul>
       </div>
       <div class="custom-modal-footer mb-3">

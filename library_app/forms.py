@@ -46,7 +46,8 @@ class LoanRequestInfo(forms.Form):
                 "inputmode": "numeric",
             }
         ),
-        required=False,
+        required=True,
+        # required=False caused submit spinner and modal to not function properly. So made note required
     )
 
     def __init__(self, *args, **kwargs):

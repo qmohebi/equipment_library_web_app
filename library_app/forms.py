@@ -19,34 +19,34 @@ class LoanRequestInfo(forms.Form):
         "",
     ]
     location = forms.ModelChoiceField(
-    label="Location",
-    empty_label="Select a location",
-    required=True,
-    queryset=LoanLocation.objects.all(),
-)
+        label="Location",
+        empty_label="Select a location",
+        required=True,
+        queryset=LoanLocation.objects.all(),
+    )
 
     requester_name = forms.CharField(
         label="Enter your name",
         max_length=200,
         required=True,
-        widget=forms.TextInput(attrs={'placeholder': 'e.g. John'}),
+        widget=forms.TextInput(attrs={"placeholder": "e.g. John"}),
     )
     extension = forms.IntegerField(
-    label="Extension",
-    required=True,
-    widget=forms.NumberInput(attrs={'placeholder': 'Enter your extension number'}),
-)
+        label="Extension",
+        required=True,
+        widget=forms.NumberInput(attrs={"placeholder": "Enter your extension number"}),
+    )
     # notes = forms.Textarea()
     notes = forms.CharField(
         label="Additional notes",
         max_length=200,
+        required=False,
         widget=forms.Textarea(
             attrs={
                 "placeholder": "Enter additional information like patient MRN",
                 "inputmode": "numeric",
             }
         ),
-        required=True,
         # required=False caused submit spinner and modal to not function properly. So made note required
     )
 
@@ -68,13 +68,14 @@ class LoanRequestInfo(forms.Form):
 
         # self.helper.form_tag = True
 
-        self.helper.add_input(Submit(
-    "submit", 
-    "Submit", 
-    css_class="btn submit-btn rounded px-5", 
-    **{'data-bs-toggle': 'modal', 'data-bs-target': '#staticBackdrop'}
-))
-
+        self.helper.add_input(
+            Submit(
+                "submit",
+                "Submit",
+                css_class="btn submit-btn rounded px-5",
+                **{"data-bs-toggle": "modal", "data-bs-target": "#staticBackdrop"}
+            )
+        )
 
 
 class ModelSelectionForm(forms.Form):

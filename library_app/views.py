@@ -2,6 +2,11 @@ from .forms import ModelSelectionForm, LoanRequestInfo
 from django.views.generic import FormView, TemplateView
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, render
+from django.utils.decorators import method_decorator
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
+import random
 
 from datetime import datetime, time
 
@@ -17,7 +22,7 @@ class HomePageView(FormView):
     form_class = LoanRequestInfo
     success_url = reverse_lazy("library_app:successful_loan")
 
-    opening_time = time(8,45)
+    opening_time = time(8, 45)
     closing_time = time(23, 45)
 
     def out_of_hour(self):
@@ -27,14 +32,17 @@ class HomePageView(FormView):
         now = datetime.now()
         current_time = now.time()
         current_day = now.isoweekday()
-        return current_day in [6, 7] or current_time < self.opening_time or current_time > self.closing_time
-
+        return (
+            current_day in [6, 7]
+            or current_time < self.opening_time
+            or current_time > self.closing_time
+        )
 
     def get(self, request, *args, **kwargs):
 
         # if self.out_of_hour():
         #     return redirect("library_app:out_of_hour")
-        
+
         loan_form = LoanRequestInfo()
         model_form = ModelSelectionForm()
         return render(
@@ -42,6 +50,10 @@ class HomePageView(FormView):
             self.template_name,
             {"loan_form": loan_form, "model_form": model_form},
         )
+
+    # @method_decorator(csrf_exempt)
+    # def dispatch(self, *args, **kwargs):
+    #     return super().dispatch(*args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         model_form = ModelSelectionForm(request.POST)
@@ -54,22 +66,34 @@ class HomePageView(FormView):
             ext = loan_form.cleaned_data.get("extension")
             notes = loan_form.cleaned_data.get("notes")
 
-            print(name, ext, notes, selected_location)
+            # Example: Generate request numbers for each selected model
+            loan_data = []
+            for model in selected_models:
+                print(model)
+                request_number = random.randint(100, 500)
+                # request_number = f"{model.pk}-{name[:3].upper()}"  # Generate request number
+                loan_data.append(
+                    {
+                        "request_number": request_number,  # Example: request number
+                        "model_name": model.display_name,  # Use a model field that is serializable
+                        # Include the primary key if needed
+                    }
+                )
 
-            for model_id in selected_models:
-                print(model_id)
-                # take model id and location id
-                # write to the database
-                # get a loan request number for each model
-                # send to front end
-
-            return self.form_valid(loan_form)
-        else:
-            return render(
-                request,
-                self.template_name,
-                {"loan_form": loan_form, "model_form": model_form},
+            # Return JSON response
+            return JsonResponse(
+                {
+                    "status": "success",
+                    "loan_data": loan_data,
+                }
             )
+
+        return JsonResponse(
+            {
+                "status": "error",
+                "errors": loan_form.errors,
+            }
+        )
 
     def form_invalid(self, form):
         print("Form is invalid")
@@ -82,4 +106,4 @@ class SuccessPageView(TemplateView):
 
 
 class OutOfHourPageView(TemplateView):
-    template_name = 'out_of_hour.html'
+    template_name = "out_of_hour.html"

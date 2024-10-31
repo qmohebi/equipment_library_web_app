@@ -4,7 +4,9 @@ from django.urls import reverse_lazy
 from django.shortcuts import redirect, render
 from django.utils.decorators import method_decorator
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
+from .forms import LogisticsRequestForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 import random
 
@@ -107,3 +109,14 @@ class SuccessPageView(TemplateView):
 
 class OutOfHourPageView(TemplateView):
     template_name = "out_of_hour.html"
+
+
+class LogisticsRequestForm(FormView):
+    template_name = "library_logistics.html"
+    form_class = LogisticsRequestForm
+    success_url = "./"
+    login_url = "./success"
+
+    def form_valid(self, form):
+        form.create_request()
+        return super().form_valid(form)

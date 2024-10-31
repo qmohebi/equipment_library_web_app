@@ -11,7 +11,7 @@ Equipment Library Loan
     {{ model_form.selected_model.errors.0 }}
   </div>
   {% endif %} {% csrf_token %}
-  <div class="categories mt-3 mb-4">
+  <div class="categories mt-3 mb-2">
     {% for model in model_form.fields.selected_model.queryset %}
     <label class="category d-flex justify-content-between flex-column gap-2 bg-white border-0">
       <input type="checkbox" name="selected_model" value="{{ model.pk }}" />
@@ -26,10 +26,14 @@ Equipment Library Loan
     </label>
     {% endfor %}
   </div>
-  <div> {{ loan_form.location|as_crispy_field }} </div>
-  <div> {{ loan_form.requester_name|as_crispy_field }} </div>
-  <div> {{ loan_form.extension|as_crispy_field }} </div>
-  <div> {{ loan_form.notes|as_crispy_field }} </div>
+  <!-- Invalid feedback -->
+  <div class="equ-invalid-feedback mb-2">Please select a equipment</div>
+  <div class="additional-form mt-4">
+    <div> {{ loan_form.location|as_crispy_field }} </div>
+    <div> {{ loan_form.requester_name|as_crispy_field }} </div>
+    <div> {{ loan_form.extension|as_crispy_field }} </div>
+    <div> {{ loan_form.notes|as_crispy_field }} </div>
+  </div>
   <div class="d-flex gap-4 align-items-center">
     <button type="submit" id="submit-btn" class="btn btn-primary submit-btn rounded px-5">Submit</button>
     <div class="spinner-wrapper ms-3" id="spinner">
@@ -51,7 +55,7 @@ Equipment Library Loan
           </ul>
         </div>
         <div class="custom-modal-footer mb-3">
-          <button type="button" class="btn btn-secondary rounded px-5" data-bs-dismiss="modal">Close</button>
+          <button id="close_modal_btn" type="button" class="btn btn-secondary rounded px-5" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>

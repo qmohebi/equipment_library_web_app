@@ -5,6 +5,7 @@
   --nhs-second-blue: #0164ce;
   --nhs-light-blue: #98bee5;
   --nhs-green-tick: #009639;
+  --form-invalid: #dc3545;
   --boot-placeholder: #626466;
   --white: #ffff;
   --dark1: #2d2d2d;
@@ -118,6 +119,13 @@ input[type="number"]::-webkit-outer-spin-button {
 .category input[type="checkbox"]:checked ~ .device-title {
   background-color: var(--nhs-main-blue);
   color: var(--white);
+}
+
+.equ-invalid-feedback {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 0.98em;
+  color: var(--form-invalid);
 }
 
 .device-img {

@@ -15,7 +15,7 @@ $(document).ready(function () {
   spinner.hide();
 
   submitBtn.click(function (event) {
-    event.preventDefault();  // Prevent the default form submission
+    event.preventDefault(); // Prevent the default form submission
 
     if (form.checkValidity()) {
       spinner.show();
@@ -40,8 +40,12 @@ $(document).ready(function () {
               );
             });
 
-            // Show the modal with the updated information
-            modal.show();
+            // fixed modal delay and spinner
+            spinner.show();
+            setTimeout(function () {
+              spinner.hide();
+              modal.show();
+            }, 1200);
           } else {
             // Handle any errors (if needed)
             alert("Something went wrong, please try again.");

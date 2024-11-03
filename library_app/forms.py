@@ -86,3 +86,26 @@ class ModelSelectionForm(forms.Form):
         error_messages={"required": "Please select a model from below!"},
         # to_field_name="equip_model_id",
     )
+
+
+class LogisticsRequestForm(forms.Form):
+    equipment_number = forms.CharField(
+        label="equipment number",
+        max_length=200,
+        required=True,
+        widget=forms.TextInput(attrs={"placeholder": "e.g. 5512345"}),
+    )
+    request_details = forms.CharField(
+        label="Enter your name",
+        max_length=200,
+        required=True,
+        widget=forms.TextInput(attrs={"placeholder": "e.g. John"}),
+    )
+    planned_date = forms.DateField(
+        label="planned-date",
+        required=True,
+        widget=forms.TextInput(attrs={"type": "date"}),
+    )
+
+    def create_request(self):
+        print("form_succesfully_submitted")

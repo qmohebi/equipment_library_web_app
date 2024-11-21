@@ -3,11 +3,17 @@ from django import forms
 from django.forms.renderers import BaseRenderer
 from django.forms.utils import ErrorList
 from .models import Category, Location, EquipmentModel, LoanLocation
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Row, Column, Layout
 
 
-class LoanRequestInfo(forms.Form):
+class LoanRequest(forms.Form):
+    selected_model = forms.ModelMultipleChoiceField(
+        queryset=EquipmentModel.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=True,
+        error_messages={"required": "Please select a model from below!"},
+        # to_field_name="equip_model_id",
+    )
+
     exclude_location = [
         "45B7DCD1518B4F289BF692BD28EE8F45",
         "45EE813FF5D442AFB799B48F49C50C75",
@@ -50,42 +56,37 @@ class LoanRequestInfo(forms.Form):
         # required=False caused submit spinner and modal to not function properly. So made note required
     )
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_id = "id-ModelSelectionForm"
-        self.helper.form_class = "form-group"
-        self.helper.form_method = "post"
-        self.helper.form_action = "success/"
-        self.helper.layout = Layout(
-            Row(
-                "location",
-                Column("requester_name", css_class="form-group col-md-6 mb-0"),
-                Column("extension", css_class="form-group col-md-6 mb-0"),
-                "notes",
-            )
-        )
+    def create_loan(self, model, requester_name, extension) -> dict:
+        """create a loan on the db and sent the loan request 
+        and model as dict"""
+        pass
 
-        # self.helper.form_tag = True
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.helper = FormHelper()
+    #     self.helper.form_id = "id-ModelSelectionForm"
+    #     self.helper.form_class = "form-group"
+    #     self.helper.form_method = "post"
+    #     self.helper.form_action = "success/"
+    #     self.helper.layout = Layout(
+    #         Row(
+    #             "location",
+    #             Column("requester_name", css_class="form-group col-md-6 mb-0"),
+    #             Column("extension", css_class="form-group col-md-6 mb-0"),
+    #             "notes",
+    #         )
+    #     )
 
-        self.helper.add_input(
-            Submit(
-                "submit",
-                "Submit",
-                css_class="btn submit-btn rounded px-5",
-                **{"data-bs-toggle": "modal", "data-bs-target": "#staticBackdrop"}
-            )
-        )
+    #     # self.helper.form_tag = True
 
-
-class ModelSelectionForm(forms.Form):
-    selected_model = forms.ModelMultipleChoiceField(
-        queryset=EquipmentModel.objects.all(),
-        widget=forms.CheckboxSelectMultiple,
-        required=True,
-        error_messages={"required": "Please select a model from below!"},
-        # to_field_name="equip_model_id",
-    )
+    #     self.helper.add_input(
+    #         Submit(
+    #             "submit",
+    #             "Submit",
+    #             css_class="btn submit-btn rounded px-5",
+    #             **{"data-bs-toggle": "modal", "data-bs-target": "#staticBackdrop"}
+    #         )
+    #     )
 
 
 class LogisticsRequestForm(forms.Form):

@@ -1,11 +1,11 @@
-from .forms import ModelSelectionForm, LoanRequestInfo
+from .forms import LoanRequest
 from django.views.generic import FormView, TemplateView
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, render
 from django.utils.decorators import method_decorator
 from django.http import JsonResponse
 from .forms import LogisticsRequestForm
-from django.contrib.auth.mixins import LoginRequiredMixin
+# from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 import random
@@ -21,8 +21,8 @@ from datetime import datetime, time
 class HomePageView(FormView):
     # model = Category
     template_name = "home.html"
-    form_class = LoanRequestInfo
-    success_url = reverse_lazy("library_app:successful_loan")
+    form_class = LoanRequest
+    # success_url = reverse_lazy("library_app:successful_loan")
 
     opening_time = time(8, 45)
     closing_time = time(23, 45)
@@ -30,7 +30,7 @@ class HomePageView(FormView):
     def out_of_hour(self):
         """
         check if the current date is outside working hours
-        and the day is weekend"""
+        and the day is weekend and return true"""
         now = datetime.now()
         current_time = now.time()
         current_day = now.isoweekday()
@@ -45,12 +45,11 @@ class HomePageView(FormView):
         # if self.out_of_hour():
         #     return redirect("library_app:out_of_hour")
 
-        loan_form = LoanRequestInfo()
-        model_form = ModelSelectionForm()
+        loan_form = LoanRequest()
         return render(
             request,
             self.template_name,
-            {"loan_form": loan_form, "model_form": model_form},
+            {"loan_form": loan_form},
         )
 
     # @method_decorator(csrf_exempt)
@@ -58,11 +57,11 @@ class HomePageView(FormView):
     #     return super().dispatch(*args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        model_form = ModelSelectionForm(request.POST)
-        loan_form = LoanRequestInfo(request.POST)
+        
+        loan_form = LoanRequest(request.POST)
 
-        if loan_form.is_valid() and model_form.is_valid():
-            selected_models = model_form.cleaned_data.get("selected_model")
+        if loan_form.is_valid():
+            selected_models = loan_form.cleaned_data.get("selected_model")
             selected_location = loan_form.cleaned_data.get("location")
             name = loan_form.cleaned_data.get("requester_name")
             ext = loan_form.cleaned_data.get("extension")

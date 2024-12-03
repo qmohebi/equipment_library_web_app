@@ -1,7 +1,7 @@
 from pathlib import Path
 from environs import Env
-import ldap
-from django_auth_ldap.config import LDAPSearch
+# import ldap
+# from django_auth_ldap.config import LDAPSearch
 import logging
 import ssl
 
@@ -55,7 +55,7 @@ INSTALLED_APPS = [
 LOGIN_REDIRECT_URL = "home"
 AUTH_USER_MODEL = "accounts.CustomUser"
 AUTHENTICATION_BACKENDS = [
-    "django_auth_ldap.backend.LDAPBackend",
+    # "django_auth_ldap.backend.LDAPBackend",
     # "django_python3_ldap.auth.LDAPBackend",
     "django.contrib.auth.backends.ModelBackend",
 ]
@@ -218,15 +218,15 @@ AUTH_LDAP_BIND_PASSWORD = AUTH_LDAP_BIND_PASSWORD
 # )
 # AUTH_LDAP_USER_DN_TEMPLATE = "SamAccountName=%(user)s,ou=St George's,DC=net,DC=stgeorges,DC=nhs,DC=uk"
 
-AUTH_LDAP_USER_SEARCH = LDAPSearch(
-    "OU=St George's,DC=net,DC=stgeorges,DC=nhs,DC=uk",
-    ldap.SCOPE_SUBTREE,
-    "(sAMAccountName=%(user)s)",
-)
+# AUTH_LDAP_USER_SEARCH = LDAPSearch(
+#     "OU=St George's,DC=net,DC=stgeorges,DC=nhs,DC=uk",
+#     ldap.SCOPE_SUBTREE,
+#     "(sAMAccountName=%(user)s)",
+# )
 
-# You can map user attributes to Django attributes as so
-AUTH_LDAP_USER_ATTR_MAP = {
-    "first_name": "givenName",
-    "last_name": "sn",
-    "email": "mail",
-}
+# # You can map user attributes to Django attributes as so
+# AUTH_LDAP_USER_ATTR_MAP = {
+#     "first_name": "givenName",
+#     "last_name": "sn",
+#     "email": "mail",
+# }
